@@ -1,24 +1,21 @@
 # Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)
 
-BIN = kerberos
 CPPFLAGS = -DDEBUG
 CFLAGS = -g -pipe -Wall -Wextra -Wformat=2 -Wpedantic -Wshadow
 LDFLAGS =
 
-BUILD_DIR = build
-SRC_DIR = src
+KERBEROS_SRC = kerberos.c tcp.c
+KERBEROSD_SRC = as.c kerberosd.c tcp.c tgs.c
 
-SRCS = $(shell find $(SRC_DIR) -name '*.c')
-OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
+all: kerberos kerberosd
 
-$(BUILD_DIR)/$(BIN): $(OBJS)
-	$(CC) -o $@ $^ $(LDFLAGS)
+kerberos: $(KERBEROS_SRC)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-$(BUILD_DIR)/%.o: %.c
-	mkdir -p $(dir $@)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
+kerberosd: $(KERBEROSD_SRC)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean:
-	$(RM) -r $(BUILD_DIR)
+	$(RM) kerberos kerberosd
 
 .PHONY: clean
