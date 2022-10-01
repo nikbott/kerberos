@@ -90,4 +90,5 @@ dkms.conf
 # End of https://www.toptal.com/developers/gitignore/api/c,database,visualstudiocode
 
 # exclude binaries
-kerberos*
+kerberos
+kerberosd
