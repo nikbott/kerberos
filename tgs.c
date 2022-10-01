@@ -1,7 +1,7 @@
 #include "kerberos.h"
 
 int
-ticket_granting_server()
+tgs()
 {
     return 0;
 }

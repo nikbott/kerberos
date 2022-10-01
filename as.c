@@ -1,7 +1,7 @@
 #include "kerberos.h"
 
 int
-authentication_server(void)
+as(void)
 {
     return 0;
 }
